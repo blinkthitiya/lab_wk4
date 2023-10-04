@@ -7,11 +7,11 @@ int main()
     float x1,x2;
 
     printf("enter your coefficients: ");
-    scanf("%d %d %d",&a,&b,&c);
+    scanf("%d %d %d",&a,&b,&c); //ax^2+bx+c
+
     puts("roots of the equation");
 
-    //1. term a
-    //x^2
+    //term a, x^2
     switch(a) {
         case 1: printf("x^2"); break;
         case 0: break;
@@ -19,10 +19,10 @@ int main()
         default: printf("%dx^2",a);
     }
 
-    //2. + sign between a and b
-    if(b>0) printf("+");
+    //+ sign between a and b
+    if(a!=0 && b>0) printf("+");
 
-    //3. term b
+    //term b, x
     switch(b) {
         case 1: printf("x"); break;
         case 0: break;
@@ -30,17 +30,33 @@ int main()
         default: printf("%dx",b);
     }
 
-    //4. + sign between b and c
-    if(c>0) printf("+");
+    //+ sign between b and c
+    if((a!=0 || b!=0) && c>0) printf("+");
 
-    //5. term c
-    printf("%d=0",c);
+    //term c
+    if(c!=0) printf("%d\n",c);
 
-    //printf("%dx^2+%dx+%d=0",a,b,c)
+    puts("=0");
 
-    x1=(-b+sqrt(b*b-4*a*c))/(2*a);
-    x2=(-b-sqrt(b*b-4*a*c))/(2*a);
+    //calculate roots of the equation
+    float sq=b*b-4*a*c;
+    if(a==0) {
+        if(b!=0)
+            printf("the answer is %.2f\n",-(float)c/b);
+        else printf("no solution");
+    }
 
+    //if number inside square root is 0, there is one solution
+    //if number inside square root is negative, there is no solution
+
+    else {
+        if(sq==0) printf("the answer is %.2f\n",-(float)b/(2*a));
+        else if(sq<0) printf("no solution\n");
+        else {
+            printf("the answers are %.2f", (-b+sqrt(sq))/(2*a));
+            printf(" and %.2f\n",(-b-sqrt(sq))/(2*a));
+        }
+    }
 
     return 0;
 }
